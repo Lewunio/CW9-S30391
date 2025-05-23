@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CW9_S30391.Models;
 
-[Table("Perscription_Medicament")]
-[PrimaryKey(nameof(IdMedicament), nameof(IdPerscription))]
-public class PerscriptionMedicament
+[Table("Prescription_Medicament")]
+[PrimaryKey(nameof(IdMedicament), nameof(IdPrescription))]
+public class PrescriptionMedicament
 {
     public int IdMedicament { get; set; }
     
-    public int IdPerscription { get; set; }
+    public int IdPrescription { get; set; }
     
     public int? Dose { get; set; }
     
@@ -20,6 +20,6 @@ public class PerscriptionMedicament
     [ForeignKey(nameof(IdMedicament))]
     public virtual Medicament Medicament { get; set; } = null!;
     
-    [ForeignKey(nameof(IdPerscription))]
-    public virtual Perscription Perscription { get; set; } = null!;
+    [ForeignKey(nameof(IdPrescription))]
+    public virtual Prescription Prescription { get; set; } = null!;
 }

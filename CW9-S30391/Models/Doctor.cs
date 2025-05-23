@@ -18,5 +18,5 @@ public class Doctor
     [MaxLength(100)] 
     public string Email { get; set; } = null!;
     
-    public virtual ICollection<Perscription> Perscriptions { get; set; } = null!;
+    public virtual ICollection<Prescription> Prescriptions { get; set; } = null!;
 }

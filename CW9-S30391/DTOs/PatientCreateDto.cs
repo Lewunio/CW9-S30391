@@ -1,21 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CW9_S30391.Models;
+namespace CW9_S30391.DTOs;
 
-[Table("Patient")]
-public class Patient
+public class PatientCreateDto
 {
-    [Key]
+    [Required]
     public int IdPatient { get; set; }
-
+    
     [MaxLength(100)] 
+    [Required] 
     public string FirstName { get; set; } = null!;
     
-    [MaxLength(100)] 
+    [MaxLength(100)]
+    [Required]
     public string LastName { get; set; } = null!;
     
+    [Required]
     public DateTime Birthdate { get; set; }
-    
-    public virtual ICollection<Prescription> Prescriptions { get; set; } = null!;
 }

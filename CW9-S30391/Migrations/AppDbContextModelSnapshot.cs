@@ -104,13 +104,13 @@ namespace CW9_S30391.Migrations
                     b.ToTable("Patient");
                 });
 
-            modelBuilder.Entity("CW9_S30391.Models.Perscription", b =>
+            modelBuilder.Entity("CW9_S30391.Models.Prescription", b =>
                 {
-                    b.Property<int>("IdPerscription")
+                    b.Property<int>("IdPrescription")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPerscription"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPrescription"));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -124,21 +124,21 @@ namespace CW9_S30391.Migrations
                     b.Property<int>("IdPatient")
                         .HasColumnType("int");
 
-                    b.HasKey("IdPerscription");
+                    b.HasKey("IdPrescription");
 
                     b.HasIndex("IdDoctor");
 
                     b.HasIndex("IdPatient");
 
-                    b.ToTable("Perscription");
+                    b.ToTable("Prescription");
                 });
 
-            modelBuilder.Entity("CW9_S30391.Models.PerscriptionMedicament", b =>
+            modelBuilder.Entity("CW9_S30391.Models.PrescriptionMedicament", b =>
                 {
                     b.Property<int>("IdMedicament")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdPerscription")
+                    b.Property<int>("IdPrescription")
                         .HasColumnType("int");
 
                     b.Property<string>("Details")
@@ -149,23 +149,23 @@ namespace CW9_S30391.Migrations
                     b.Property<int?>("Dose")
                         .HasColumnType("int");
 
-                    b.HasKey("IdMedicament", "IdPerscription");
+                    b.HasKey("IdMedicament", "IdPrescription");
 
-                    b.HasIndex("IdPerscription");
+                    b.HasIndex("IdPrescription");
 
-                    b.ToTable("Perscription_Medicament");
+                    b.ToTable("Prescription_Medicament");
                 });
 
-            modelBuilder.Entity("CW9_S30391.Models.Perscription", b =>
+            modelBuilder.Entity("CW9_S30391.Models.Prescription", b =>
                 {
                     b.HasOne("CW9_S30391.Models.Doctor", "Doctor")
-                        .WithMany("Perscriptions")
+                        .WithMany("Prescriptions")
                         .HasForeignKey("IdDoctor")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CW9_S30391.Models.Patient", "Patient")
-                        .WithMany("Perscriptions")
+                        .WithMany("Prescriptions")
                         .HasForeignKey("IdPatient")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -175,43 +175,43 @@ namespace CW9_S30391.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("CW9_S30391.Models.PerscriptionMedicament", b =>
+            modelBuilder.Entity("CW9_S30391.Models.PrescriptionMedicament", b =>
                 {
                     b.HasOne("CW9_S30391.Models.Medicament", "Medicament")
-                        .WithMany("PerscriptionMedicaments")
+                        .WithMany("PrescriptionMedicaments")
                         .HasForeignKey("IdMedicament")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CW9_S30391.Models.Perscription", "Perscription")
-                        .WithMany("PerscriptionMedicaments")
-                        .HasForeignKey("IdPerscription")
+                    b.HasOne("CW9_S30391.Models.Prescription", "Prescription")
+                        .WithMany("PrescriptionMedicaments")
+                        .HasForeignKey("IdPrescription")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Medicament");
 
-                    b.Navigation("Perscription");
+                    b.Navigation("Prescription");
                 });
 
             modelBuilder.Entity("CW9_S30391.Models.Doctor", b =>
                 {
-                    b.Navigation("Perscriptions");
+                    b.Navigation("Prescriptions");
                 });
 
             modelBuilder.Entity("CW9_S30391.Models.Medicament", b =>
                 {
-                    b.Navigation("PerscriptionMedicaments");
+                    b.Navigation("PrescriptionMedicaments");
                 });
 
             modelBuilder.Entity("CW9_S30391.Models.Patient", b =>
                 {
-                    b.Navigation("Perscriptions");
+                    b.Navigation("Prescriptions");
                 });
 
-            modelBuilder.Entity("CW9_S30391.Models.Perscription", b =>
+            modelBuilder.Entity("CW9_S30391.Models.Prescription", b =>
                 {
-                    b.Navigation("PerscriptionMedicaments");
+                    b.Navigation("PrescriptionMedicaments");
                 });
 #pragma warning restore 612, 618
         }

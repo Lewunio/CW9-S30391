@@ -4,13 +4,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CW9_S30391.Models;
 
-[Table("Perscription")]
-public class Perscription
+[Table("Prescription")]
+public class Prescription
 {
-    [Key] public int IdPerscription { get; set; }
+    [Key] 
+    public int IdPrescription { get; set; }
+    
     public DateTime Date { get; set; }
+    
     public DateTime DueDate { get; set; }
+    
     public int IdPatient { get; set; }
+    
     public int IdDoctor { get; set; }
 
     [ForeignKey(nameof(IdPatient))] 
@@ -19,5 +24,5 @@ public class Perscription
     [ForeignKey(nameof(IdDoctor))] 
     public virtual Doctor Doctor { get; set; } = null!;
     
-    public virtual ICollection<PerscriptionMedicament> PerscriptionMedicaments { get; set; } = null!;
+    public virtual ICollection<PrescriptionMedicament> PrescriptionMedicaments { get; set; } = null!;
 }
