@@ -9,16 +9,16 @@ namespace CW9_S30391.Controllers;
 [Route("[controller]")]
 public class PrescriptionsController(IDbService service) : ControllerBase
 {
-    // [HttpPost]
-    // public async Task<IActionResult> AddPerscription([FromBody] PrescriptionCreateDto prescriptionData)
-    // {
-    //     try
-    //     {
-    //         var perscription = await service.CreatePerscriptionAsync(prescriptionData);
-    //         return Created($"prescriptions/{perscription.IdPerscription}",perscription);
-    //     } catch (Exception e)
-    //     {
-    //         return NotFound(e.Message);
-    //     }
-    // }
+    [HttpPost]
+    public async Task<IActionResult> AddPerscription([FromBody] PrescriptionCreateDto prescriptionData)
+    {
+        try
+        {
+            var perscription = await service.CreatePerscriptionAsync(prescriptionData);
+            return Created($"prescriptions/{perscription.IdPrescription}",perscription);
+        } catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+    }
 }
