@@ -4,6 +4,7 @@ using CW9_S30391.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CW9_S30391.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250523160037_Literowka")]
+    partial class Literowka
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,22 +51,6 @@ namespace CW9_S30391.Migrations
                     b.HasKey("IdDoctor");
 
                     b.ToTable("Doctor");
-
-                    b.HasData(
-                        new
-                        {
-                            IdDoctor = 1,
-                            Email = "m.zielinski@clinic.com",
-                            FirstName = "Marek",
-                            LastName = "Zieliński"
-                        },
-                        new
-                        {
-                            IdDoctor = 2,
-                            Email = "e.bak@clinic.com",
-                            FirstName = "Ewa",
-                            LastName = "Bąk"
-                        });
                 });
 
             modelBuilder.Entity("CW9_S30391.Models.Medicament", b =>
@@ -92,22 +79,6 @@ namespace CW9_S30391.Migrations
                     b.HasKey("IdMedicament");
 
                     b.ToTable("Medicament");
-
-                    b.HasData(
-                        new
-                        {
-                            IdMedicament = 1,
-                            Description = "Pain reliever",
-                            Name = "Ibuprofen",
-                            Type = "Tablet"
-                        },
-                        new
-                        {
-                            IdMedicament = 2,
-                            Description = "Antibiotic",
-                            Name = "Amoxicillin",
-                            Type = "Capsule"
-                        });
                 });
 
             modelBuilder.Entity("CW9_S30391.Models.Patient", b =>
@@ -134,22 +105,6 @@ namespace CW9_S30391.Migrations
                     b.HasKey("IdPatient");
 
                     b.ToTable("Patient");
-
-                    b.HasData(
-                        new
-                        {
-                            IdPatient = 1,
-                            Birthdate = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Anna",
-                            LastName = "Kowalska"
-                        },
-                        new
-                        {
-                            IdPatient = 2,
-                            Birthdate = new DateTime(1985, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Jan",
-                            LastName = "Nowak"
-                        });
                 });
 
             modelBuilder.Entity("CW9_S30391.Models.Prescription", b =>
@@ -179,24 +134,6 @@ namespace CW9_S30391.Migrations
                     b.HasIndex("IdPatient");
 
                     b.ToTable("Prescription");
-
-                    b.HasData(
-                        new
-                        {
-                            IdPrescription = 1,
-                            Date = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DueDate = new DateTime(2024, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdDoctor = 1,
-                            IdPatient = 1
-                        },
-                        new
-                        {
-                            IdPrescription = 2,
-                            Date = new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DueDate = new DateTime(2024, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdDoctor = 2,
-                            IdPatient = 2
-                        });
                 });
 
             modelBuilder.Entity("CW9_S30391.Models.PrescriptionMedicament", b =>
@@ -220,22 +157,6 @@ namespace CW9_S30391.Migrations
                     b.HasIndex("IdPrescription");
 
                     b.ToTable("Prescription_Medicament");
-
-                    b.HasData(
-                        new
-                        {
-                            IdMedicament = 1,
-                            IdPrescription = 1,
-                            Details = "Twice a day",
-                            Dose = 200
-                        },
-                        new
-                        {
-                            IdMedicament = 2,
-                            IdPrescription = 2,
-                            Details = "Three times a day",
-                            Dose = 500
-                        });
                 });
 
             modelBuilder.Entity("CW9_S30391.Models.Prescription", b =>
