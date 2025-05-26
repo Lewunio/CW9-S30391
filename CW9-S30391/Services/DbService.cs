@@ -9,14 +9,13 @@ namespace CW9_S30391.Services;
 public interface IDbService
 {
     public Task<PrescriptionGetDto> CreatePerscriptionAsync(PrescriptionCreateDto prescriptionData);
+    public Task<PatientGetDto> GetPatientByIdAsync(int id);
 }
 
 public class DbService(AppDbContext data) : IDbService
 {
     public async Task<PrescriptionGetDto> CreatePerscriptionAsync(PrescriptionCreateDto prescriptionData)
     {
-        
-
         if (prescriptionData.Medicaments.Count > 10)
         {
             throw new NotFoundException("Prescription can't have more than 10 medicaments");
@@ -96,5 +95,40 @@ public class DbService(AppDbContext data) : IDbService
                 throw new InvalidOperationException();
             }).ToList()
         };
+    }
+
+    public async Task<PatientGetDto> GetPatientByIdAsync(int id)
+    {
+        var result = await data.Patients.Select(st => new PatientGetDto
+        {
+            IdPatient = st.IdPatient,
+            FirstName = st.FirstName,
+            LastName = st.LastName,
+            Birthdate = st.Birthdate,
+            Prescriptions = st.Prescriptions.Select(p => new PrescriptionGetDto
+                {
+                    IdPrescription = p.IdPrescription,
+                    Date = p.Date,
+                    DueDate = p.DueDate,
+                    Doctor = new DoctorGetDto
+                    {
+                        IdDoctor = p.IdDoctor,
+                        FirstName = p.Doctor.FirstName
+                    },
+                    Medicaments = p.PrescriptionMedicaments.Select(pm => new MedicamentDetailsGetDto
+                    {
+                        IdMedicament = pm.IdMedicament,
+                        Dose = pm.Dose,
+                        Description = pm.Details,
+                        Name = pm.Medicament.Name
+                    }).ToList()
+                }
+            ).ToList()
+        }).FirstOrDefaultAsync(p => p.IdPatient == id);
+        if (result == null)
+        {
+            throw new NotFoundException($"Patient of id {id} not found");
+        }
+        return result;
     }
 }
