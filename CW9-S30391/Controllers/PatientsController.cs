@@ -1,6 +1,4 @@
-﻿using CW9_S30391.DTOs;
-using CW9_S30391.Models;
-using CW9_S30391.Services;
+﻿using CW9_S30391.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CW9_S30391.Controllers;
