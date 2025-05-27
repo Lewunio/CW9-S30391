@@ -1,4 +1,5 @@
 ﻿using CW9_S30391.DTOs;
+using CW9_S30391.Exceptions;
 using CW9_S30391.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,13 +10,13 @@ namespace CW9_S30391.Controllers;
 public class PrescriptionsController(IDbService service) : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> AddPerscription([FromBody] PrescriptionCreateDto prescriptionData)
+    public async Task<IActionResult> AddPrescription([FromBody] PrescriptionCreateDto prescriptionData)
     {
         try
         {
-            var perscription = await service.CreatePerscriptionAsync(prescriptionData);
-            return Created($"prescriptions/{perscription.IdPrescription}",perscription);
-        } catch (Exception e)
+            var prescription = await service.CreatePrescriptionAsync(prescriptionData);
+            return Created($"prescriptions/{prescription.IdPrescription}",prescription);
+        } catch (NotFoundException e)
         {
             return NotFound(e.Message);
         }

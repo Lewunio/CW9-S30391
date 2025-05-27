@@ -8,13 +8,13 @@ namespace CW9_S30391.Services;
 
 public interface IDbService
 {
-    public Task<PrescriptionGetDto> CreatePerscriptionAsync(PrescriptionCreateDto prescriptionData);
+    public Task<PrescriptionGetDto> CreatePrescriptionAsync(PrescriptionCreateDto prescriptionData);
     public Task<PatientGetDto> GetPatientByIdAsync(int id);
 }
 
 public class DbService(AppDbContext data) : IDbService
 {
-    public async Task<PrescriptionGetDto> CreatePerscriptionAsync(PrescriptionCreateDto prescriptionData)
+    public async Task<PrescriptionGetDto> CreatePrescriptionAsync(PrescriptionCreateDto prescriptionData)
     {
         if (prescriptionData.Medicaments.Count > 10)
         {
